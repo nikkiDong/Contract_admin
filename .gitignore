@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Build / deploy artifacts (regenerate via deploy/build.py, cdk synth)
+build/
+deploy/cdk.out/
+deploy/cdk-outputs.json
+
+# OS cruft
+.DS_Store
+
+# Local tool config
+.claude/
+
+# Team scaffold repo — tracked separately at
+# https://github.com/NSF-DARSE/Deldot-Contract-team
+Deldot-Contract-team/

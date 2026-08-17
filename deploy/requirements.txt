@@ -1,0 +1,12 @@
+# CDK app dependencies (install into the repo venv).
+aws-cdk-lib>=2.160.0,<3
+constructs>=10.0.0,<11
+
+# Needed to run deploy/handler.py locally; provided by the Lambda runtime in AWS.
+boto3==1.35.76
+
+# Bundled into the Lambda by deploy/build.py.
+pypdf==5.1.0
+
+# The CDK CLI itself is invoked via npx and needs no pip install:
+#   npx aws-cdk@2 deploy

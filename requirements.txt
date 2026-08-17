@@ -1,0 +1,11 @@
+# The deterministic pipeline runs on the Python standard library alone.
+# Text extraction prefers the `pdftotext` binary (poppler); install either:
+#   brew install poppler
+# or use the pure-Python fallback:
+pypdf==5.1.0
+
+# Only needed for --llm bedrock (adjudication of residual uncertainty).
+boto3==1.35.76
+
+# Only needed for --llm anthropic.
+anthropic==0.40.0
