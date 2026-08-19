@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DORA — DelDOT Contract Review Assistant</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/deldot-logo.webp" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <img class="brand-logo" src="/deldot-logo.webp" alt="DelDOT" />
+        <div class="brand-text">
+          <span class="brand-mark">DORA</span>
+          <span class="brand-sub">DelDOT Orchestrated Review Assistant</span>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span id="health-dot" class="health-dot" title="Checking server…"></span>
+        <button id="new-session" class="btn-ghost" type="button">New session</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-block">
+          <span class="sidebar-label">Upload a package</span>
+          <form id="upload-form">
+            <input
+              id="upload-package-id"
+              type="text"
+              maxlength="64"
+              placeholder="Package ID (optional)"
+            />
+            <label class="upload-drop" id="upload-drop" for="upload-files">
+              <span id="upload-drop-text">Choose package folder…</span>
+            </label>
+            <input
+              id="upload-files"
+              type="file"
+              multiple
+              webkitdirectory
+              directory
+              hidden
+            />
+            <button id="upload-submit" type="submit" class="btn-ghost" disabled>Upload</button>
+          </form>
+          <p class="sidebar-hint">
+            Select the package folder — it should contain
+            <code>Project_Metadata.json</code> (required), an optional
+            <code>Document_Index.csv</code>, and its PDFs (in a <code>Docs/</code>
+            subfolder or directly inside).
+          </p>
+          <p id="upload-status" class="upload-status" hidden></p>
+        </div>
+
+        <div class="sidebar-block">
+          <span class="sidebar-label">Quick prompts</span>
+          <div class="quick-prompts" id="quick-prompts">
+            <button type="button" data-template="Review {package} against all 18 CC criteria and give me the full row-by-row table.">Full 18-criteria review</button>
+            <button type="button" data-template="Review {package} against CC-04 (Performance and payment bonds).">Single requirement — CC-04</button>
+            <button type="button" data-template="Review {package} against CC-09 (Buy America / BABA applicability).">Single requirement — CC-09</button>
+            <button type="button" data-template="Which addenda apply to {package}, and did any of them supersede a base-document clause?">Addenda precedence check</button>
+          </div>
+        </div>
+
+        <div class="sidebar-block sidebar-note">
+          <p><strong>Decision support only.</strong> DORA flags provisions for human review. It does not issue approval, award, or legal determinations.</p>
+        </div>
+      </aside>
+
+      <main class="chat">
+        <div id="messages" class="messages">
+          <div class="msg msg-assistant">
+            <div class="msg-role">DORA</div>
+            <div class="msg-body">
+              Hi — I review DelDOT contract packages against the 18-item CC checklist. Upload a
+              package on the left, or name one already loaded, then ask me to review it in full or
+              against one requirement. Every finding I return is grounded in three sources
+              (checklist rule, section citation, and the package documents) and is a flag for
+              human review, not a verdict.
+            </div>
+          </div>
+        </div>
+
+        <form id="composer" class="composer">
+          <textarea
+            id="composer-input"
+            rows="1"
+            placeholder="Review DEV-HARBOR-CROSSING against CC-04…"
+            autocomplete="off"
+          ></textarea>
+          <button id="composer-send" type="submit">Send</button>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <template id="tpl-trace-item">
+    <div class="trace-item">
+      <div class="trace-tool"></div>
+      <pre class="trace-io"></pre>
+    </div>
+  </template>
+
+  <script src="/app.js"></script>
+</body>
+</html>

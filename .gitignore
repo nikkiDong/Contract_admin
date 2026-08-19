@@ -14,6 +14,9 @@ deploy/cdk-outputs.json
 # Local tool config
 .claude/
 
+# User-uploaded contract packages (deploy/dora_chat.py) — private, not sample data
+/uploads/
+
 # Team scaffold repo — tracked separately at
 # https://github.com/NSF-DARSE/Deldot-Contract-team
 Deldot-Contract-team/
